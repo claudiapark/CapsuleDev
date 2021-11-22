@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand">CapsuleDev site</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark">Home2</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+<main role="main" class="pb-3">
+
+<h1>Página do médico logado</h1>
+<p>Bem vindo(a), dr(a). <span th:text="${medico.nome}"></span>!</p>
+<h2>Lista dos seus pacientes</h2>
+	<th:block th:each="paciente: ${pacientesMedico}">
+		<form th:action="@{'/loginMedico/paciente/' + ${paciente.codigo}}" method="post">
+			<!-- 	<p th:text="${paciente.nome}"></p> -->
+			<input type="submit" th:value="${paciente.nome}">
+		</form>
+	</th:block>
+<h2>Lista de todos os seus monitoramentos</h2>
+	<th:block th:each="monitoramento: ${medico.monitoramentos}">
+		<form th:action="@{'/loginMedico/paciente/monitoramento/' + ${monitoramento.codigo}}" method="post">
+			<input type="submit" th:value="${monitoramento.codigo}">
+		</form>
+	</th:block>
+	</main>
+	
+	</div>
+	<footer class="border-top footer text-muted">
+        <div class="container">
+           <p>Capsule Dev &copy; 2020</p>
+        </div>
+    </footer>
+</body>
+</html>
